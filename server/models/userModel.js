@@ -20,9 +20,14 @@ const userSchema = new Schema({
     },
     enrolledCourses : [
         {
-            
+            type : Schema.Types.ObjectId,
+            ref : 'Course',
         }
-    ]
+    ],
+    photoUrl : {
+        type : String,
+        default : "",
+    }
 }, {timestamps : true});
 
 module.exports = model('User', userSchema);
