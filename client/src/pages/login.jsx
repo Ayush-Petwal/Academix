@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
 
 const Login = () => {
   const [signupInput, setSignupInput] = useState({
@@ -30,6 +31,11 @@ const Login = () => {
       setLoginInput({ ...loginInput, [name]: value });
     }
   };
+
+  const handleRegistration = (type) =>{
+    const inputData = type === "signup" ? signupInput : loginInput
+    console.log(inputData)
+  }
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">
@@ -85,7 +91,7 @@ const Login = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Signup</Button>
+              <Button onClick = {() => handleRegistration("signup")}>Signup</Button>
             </CardFooter>
           </Card>
         </TabsContent>
@@ -124,7 +130,7 @@ const Login = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Login</Button>
+              <Button onClick = {() => handleRegistration("login")}>Login</Button>
             </CardFooter>
           </Card>
         </TabsContent>
