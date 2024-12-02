@@ -17,8 +17,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -30,6 +28,7 @@ import {
 } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DarkMode from "./DarkMode";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 const Navbar = () => {
   const user = true;
@@ -99,6 +98,7 @@ const Navbar = () => {
 export default Navbar;
 
 const MobileNavbar = () => {
+  const role = 'instructor'
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -106,23 +106,27 @@ const MobileNavbar = () => {
             <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent className = "flex flex-row">
+      <SheetContent className = "flex flex-col">
         <SheetHeader className = "flex flex-row items-center justify-between mt-2 " >
           <SheetTitle>Academix</SheetTitle>
           <DarkMode />
         </SheetHeader>
 
-        <nav className=" ">
+        <nav className=" flex flex-col space-y-4 ">
             <span>My Learning</span>
             <span>Edit Profile</span>
             <span>Log out</span>
         </nav>
-
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
+        <Separator />
+        {
+          role === 'instructor' && (
+            <SheetFooter>
+              <SheetClose asChild>
+                <Button type="submit">Dashboard</Button>
+              </SheetClose>
+            </SheetFooter>
+          )
+        }
       </SheetContent>
     </Sheet>
   );
