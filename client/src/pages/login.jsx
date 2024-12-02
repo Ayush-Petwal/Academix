@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useRegisterUserMutation, useLoginUserMutation } from "@/features/api/authApi";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [signupInput, setSignupInput] = useState({
@@ -51,20 +52,24 @@ const Login = () => {
     const action = type === "signup" ? registerUser : loginUser
     await action(inputData);
   }
+
+  const navigate = useNavigate()
+
   useEffect(() =>{
     if(registerIsSuccess && registerData){
       toast.success(registerData.message || "User registered successfully");
     }
     if(registerError){
-      toast.error(registerData.data.message || "Something went wrong");
+      toast.error(registerError.data?.message || "Something went wrong");
     }
     if(loginIsSuccess && loginData){
-      toast.success(loginData.data.message || "Logged in successfully");
+      toast.success(loginData.message || "Logged in successfully");
+      navigate("/")
     }
     if(loginError){
-      toast.error(loginData.data.message || "Something went wrong");
+      toast.error(loginError.data?.message || "Something went wrong");
     }
-  }, [loginIsLoading, registerIsLoading, loginData, registerData, loginError, registerError])
+  }, [loginIsLoading, registerIsLoading, loginData, registerData, loginError, registerError, navigate])
   return (
     <div className="flex justify-center items-center w-full mt-20">
       <Tabs defaultValue="account" className="w-[400px]">

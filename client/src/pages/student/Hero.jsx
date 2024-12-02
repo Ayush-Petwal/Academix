@@ -14,8 +14,9 @@ const Hero = () => {
             </p>
 
             <form action="" className=' flex items-center  bg-white dark:bg-gray-800 rounded-full shadow-lg overflow-hidden max-w-xl mx-auto mb-6 '>
-                <Input type="text"
-                className = " flex-grow border-none focus-visible:ring-0 px-6 py-3 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 " />
+            <Input type="text"
+                placeholder="Search Courses"
+                className = "flex-grow border-none focus-visible:ring-0 px-6 py-3 text-gray-900 dark:text-gray-100 placeholder:opacity-50 placeholder-gray-400 dark:placeholder-gray-500" />
                 <Button className = " bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-r-full hover:bg-blue-700 hover:dark:bg-blue-800 " >Search</Button>
             </form>
             <Button className ="bg-white dark:bg-gray-800 text-blue-600 rounded-full hover:bg-gray-200 " > Explore Courses </Button>
