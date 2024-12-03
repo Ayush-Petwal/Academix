@@ -4,6 +4,7 @@ import Login from "./pages/login";
 import Hero from "./pages/student/Hero";
 import MainLayout from "./layout/MainLayout"
 import { RouterProvider } from "react-router";
+import Courses from "./pages/student/Courses";
 
 const appRouter = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const appRouter = createBrowserRouter([
         element: (
           <>
             <Hero />
-            {/* <Courses /> */}
+            <Courses />
           </>
         ),
       },
