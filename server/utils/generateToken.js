@@ -1,18 +1,26 @@
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+import jwt from "jsonwebtoken";
 
-const generateToken = (res, user, message) => {
-    const token = jwt.sign({userId : user._id}, process.env.SECRET_KEY, {expiresIn : '7d'});
-    return res.status(200).cookie('token', token, {
-        httpOnly : true,
-        sameSite : 'strict',
-        maxAge : 7 * 24 * 60 * 60 * 1000,
-    })
-    .json({
-        success : true,
-        message : message,
-        user : user,
-    })
-}
+export const generateToken = (res, user, message) => {
+  const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+    expiresIn: "1d",
+  });
 
-module.exports = {generateToken};
+  return res
+    .status(200)
+    .cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      path: '/'
+    }).json({
+        success: true,
+        message,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          photoUrl: user.photoUrl
+        }
+    });
+};
